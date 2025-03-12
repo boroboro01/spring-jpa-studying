@@ -1,8 +1,6 @@
-package jpabook.jpashop.domain.member;
+package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
-import jpabook.jpashop.domain.Address;
-import jpabook.jpashop.domain.Order;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +15,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    private String username;
+    private String name;
 
     @Embedded
     private Address address;
