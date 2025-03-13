@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Getter @Setter
+@Getter
 public class Item {
 
     @Id @GeneratedValue
@@ -23,4 +23,26 @@ public class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    //==Business Logic==//
+
+    /**
+     * stock의 양을 증가시키는 로직입니다.
+     * @param quantity
+     */
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    /**
+     * stock의 양을 감소시키는 로직입니다.
+     * @param quantity
+     */
+    public void removeStock(int quantity) throws NotEnoughStockException {
+         int restStock = stockQuantity - quantity;
+         if (restStock < 0) {
+             throw new NotEnoughStockException("Stock의 수가 0보다 작을 수 없습니다.");
+         }
+         this.stockQuantity = restStock;
+    }
 }
