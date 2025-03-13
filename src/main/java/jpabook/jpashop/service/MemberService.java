@@ -19,10 +19,10 @@ public class MemberService {
      * 데이터베이스에 멤버 정보를 저장합니다.
      * @param member
      * @return member Id
-     * @throws IllegalAccessException
+     * @throws IllegalStateException
      */
     @Transactional(readOnly = false)
-    public Long join(Member member) throws IllegalAccessException {
+    public Long join(Member member) throws IllegalStateException {
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
         return member.getId();
@@ -31,12 +31,12 @@ public class MemberService {
     /**
      * 데이터베이스에서 멤버 이름을 조회하여, 중복을 확인합니다.
      * @param member
-     * @throws IllegalAccessException
+     * @throws IllegalStateException
      */
-    private void validateDuplicateMember(Member member) throws IllegalAccessException {
+    private void validateDuplicateMember(Member member) throws IllegalStateException {
         List<Member> findMembers = memberRepository.findByName(member.getName());
         if (!findMembers.isEmpty()) {
-            throw new IllegalAccessException("이미 존재하는 회원입니다.");
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
 
