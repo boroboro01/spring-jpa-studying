@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.domain.exception.NotEnoughStockException;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Getter
+@Getter @Setter
 public class Item {
 
     @Id @GeneratedValue

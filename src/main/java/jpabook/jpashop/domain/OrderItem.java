@@ -30,9 +30,6 @@ public class OrderItem {
 
     private int count;
 
-    public void add(OrderItem orderItem) {
-    }
-
     //==Factory Method==//
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
