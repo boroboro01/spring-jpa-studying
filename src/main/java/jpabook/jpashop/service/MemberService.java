@@ -45,7 +45,7 @@ public class MemberService {
      * @param id
      * @return member
      */
-    public Member findMember(Long id) {
+    public Member findMemberById(Long id) {
         return memberRepository.findById(id);
     }
 
