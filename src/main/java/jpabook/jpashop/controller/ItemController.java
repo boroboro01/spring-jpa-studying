@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import static jpabook.jpashop.domain.item.Book.createBook;
@@ -23,10 +24,11 @@ public class ItemController {
     }
 
     @PostMapping("/items/new")
-    public String create(BookForm form) {
+    public String create(@ModelAttribute("form") BookForm form) {
 
         Book book = createBook(form.getName(), form.getPrice(), form.getStockQuantity(), form.getAuthor(), form.getIsbn());
-
+        System.out.println("Book created: " + book.getName() + ", " + book.getPrice() + ", " + book.getStockQuantity()
+                + ", " + book.getAuthor() + ", " + book.getIsbn());
         itemService.saveItem(book);
         return "redirect:/items";
     }
